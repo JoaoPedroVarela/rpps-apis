@@ -31,8 +31,8 @@ public class TelefoneRepository implements GenericRepository<Telefone, Void> {
     @Override
     public Void insert(Telefone entity) {
         try {
-            String sql = "INSERT INTO telefone (idtelefone, idcontribuinte, numero, tipo) VALUES (?, ?, ?, ?)";
-            template.update(sql, entity.getIdTelefone(), entity.getIdContribuinte(), entity.getNumero(), entity.getTipoTelefone());
+            String sql = "INSERT INTO telefone (idcontribuinte, numero, tipo) VALUES (?, ?, ?)";
+            template.update(sql, entity.getIdContribuinte(), entity.getNumero(), entity.getTipoTelefone());
         } catch (DataAccessException e) {
             System.err.println("Erro ao inserir telefone: " + e.getMessage());
         }

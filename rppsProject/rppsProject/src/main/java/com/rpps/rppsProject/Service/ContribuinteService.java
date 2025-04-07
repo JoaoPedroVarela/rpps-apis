@@ -52,7 +52,7 @@ public class ContribuinteService {
             Filiacao filiacao = new Filiacao();
             filiacao.setIdParente(parenteRepository.insert(parente));
             filiacao.setIdContribuinte(idContribuinte);
-            filiacao.setIdTipoParentesco(parenteTipo.tipoParentescoDTO().idTipoParentesco());
+            filiacao.setIdTipoParentesco(parenteTipo.idTipoParentesco());
 
             filiacaoRepository.insert(filiacao);
         });

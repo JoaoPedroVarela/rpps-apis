@@ -64,4 +64,11 @@ public class ContribuicaoService {
                         contribuicao.getDataReferente(), contribuicao.getIdSalarioMinimo())).toList();
 
     }
+
+    public List<ContribuicaoDTO> listarContribuicoesPorCPF(String cpfContribuinte) {
+        return contribuicaoRepository.findAllContribuicaoPorCPF(cpfContribuinte).stream()
+                .map(contribuicao -> new ContribuicaoDTO(contribuicao.getIdContribuicao(), contribuicao.getIdContribuinte(),
+                        contribuicao.getDataContribuicao(), contribuicao.getValorContribuicao(),
+                        contribuicao.getDataReferente(), contribuicao.getIdSalarioMinimo())).toList();
+    }
 }

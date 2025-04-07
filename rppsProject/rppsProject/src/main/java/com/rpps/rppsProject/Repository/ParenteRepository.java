@@ -32,9 +32,12 @@ public class ParenteRepository implements GenericRepository<Parente, Long> {
     public Long insert(Parente entity) {
         try {
             String sql = "SELECT idparente FROM parente WHERE cpfparente = ?";
-            Long id = template.queryForObject(sql, Long.class, entity.getCpfParente());
-            if (id != null) {
-                return id;
+            List<Long> ids = template.query(sql, (rs, rowNum) -> rs.getLong("idparente"), entity.getCpfParente());
+
+            Optional<Long> idOptional = ids.stream().findFirst();
+
+            if (idOptional.isPresent()) {
+                return idOptional.get();
             } else {
                 String sql2 = "INSERT INTO parente (nomeparente, cpfparente) VALUES (?, ?) RETURNING idparente;";
                 return template.queryForObject(sql2, Long.class, entity.getNomeParente(), entity.getCpfParente());
@@ -43,6 +46,7 @@ public class ParenteRepository implements GenericRepository<Parente, Long> {
             throw new RuntimeException("Erro no insert de Parente", e);
         }
     }
+
 
     @Override
     public Long update(Parente entity) {

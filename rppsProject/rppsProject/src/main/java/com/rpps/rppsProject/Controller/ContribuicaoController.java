@@ -38,4 +38,10 @@ public class ContribuicaoController {
         List<ContribuicaoDTO> lista = contribuicaoService.listarContribuicoes();
         return ResponseEntity.ok(lista);
     }
+
+    @GetMapping("/cpf/{cpfContribuinte}")
+    public ResponseEntity<List<ContribuicaoDTO>> listarPeloCPF(@PathVariable String cpfContribuinte) {
+        List<ContribuicaoDTO> listaContribuicoes = contribuicaoService.listarContribuicoesPorCPF(cpfContribuinte);
+        return ResponseEntity.ok(listaContribuicoes);
+    }
 }

@@ -33,8 +33,8 @@ public class EnderecoRepository implements GenericRepository<Endereco, Void> {
     @Override
     public Void insert(Endereco entity) {
         try {
-            String sql = "INSERT INTO endereco (idendereco, idcontribuinte, cep, numero, estado) VALUES (?, ?, ?, ?, ?)";
-            template.update(sql, entity.getIdEndereco(), entity.getIdContribuinte(), entity.getCep(), entity.getNumero(), entity.getEstado());
+            String sql = "INSERT INTO endereco (idcontribuinte, cep, numero, estado) VALUES (?, ?, ?, ?)";
+            template.update(sql, entity.getIdContribuinte(), entity.getCep(), entity.getNumero(), entity.getEstado());
         } catch (DataAccessException e) {
             System.err.println("Erro ao inserir endereco: " + e.getMessage());
         }

@@ -89,6 +89,6 @@ public class FiliacaoRepository implements GenericRepository<Filiacao, Long> {
         WHERE idcontribuinte = ?
         """;
 
-        return template.query(sql, DadosGenealogicosDTO.rowMapper);
+        return template.query(sql, DadosGenealogicosDTO.rowMapper, idContribuinte);
     }
 }

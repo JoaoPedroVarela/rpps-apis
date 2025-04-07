@@ -127,6 +127,19 @@ public class ContribuicaoRepository implements GenericRepository<Contribuicao, L
         }
     }
 
+    public List<Contribuicao> findAllContribuicaoPorCPF(String cpfContribuinte) {
+        try {
+            String sql = """
+            SELECT contribuicao.* FROM contribuicao
+            JOIN contribuinte c ON c.idcontribuinte = contribuicao.idcontribuinte
+            WHERE c.cpf = ?;
+            """;
+            return template.query(sql, rowMapper, cpfContribuinte);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao buscar contribuições pelo CPF", e);
+        }
+    }
+
     public boolean existeContribuicaoNoMesmoMes(Long idContribuinte, LocalDate dataReferencia) {
         String sql = """
         SELECT COUNT(*) 

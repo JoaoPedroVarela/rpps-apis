@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,10 @@ public class HistoricoSalarioMinimoRepository implements GenericRepository<Histo
             historicoSalarioMinimo.setIdSalarioMinimo(rs.getLong("idsalariominimo"));
             historicoSalarioMinimo.setValor(rs.getBigDecimal("valor"));
             historicoSalarioMinimo.setDataInicioVigencia(rs.getDate("data_inicio").toLocalDate());
-            historicoSalarioMinimo.setDataFimVigencia(rs.getDate("data_fim").toLocalDate());
+            Date dataFim = rs.getDate("data_fim");
+            if (dataFim != null) {
+                historicoSalarioMinimo.setDataFimVigencia(dataFim.toLocalDate());
+            }
             return historicoSalarioMinimo;
         }
     };
